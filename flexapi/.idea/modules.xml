@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/rest-django.iml" filepath="$PROJECT_DIR$/.idea/rest-django.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/flexapi.iml" filepath="$PROJECT_DIR$/.idea/flexapi.iml" />
     </modules>
   </component>
 </project>

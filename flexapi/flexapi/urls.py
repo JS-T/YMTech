@@ -16,6 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from ymtech.views import status as ymstatus
+from ymtech.views import data as ymdata
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^status/alive/$', ymstatus.alive),
+    url(r'^status/origin/$', ymstatus.origin),
+    url(r'^data/submit/$', ymdata.submit),
+    url(r'^status/env/(\d)$', ymstatus.env)
 ]
