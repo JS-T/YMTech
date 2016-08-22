@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^status/alive/$', ymstatus.alive),
     url(r'^status/origin/$', ymstatus.origin),
     url(r'^data/submit/$', ymdata.submit),
-    url(r'^status/env/(\d)$', ymstatus.env)
+    url(r'^status/env/(\d)/$', ymstatus.env),
+    url(r'^status/csv/(\d).csv$', ymstatus.csv)
 ]

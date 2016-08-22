@@ -4,8 +4,9 @@ import time
 import json
 from ymtech.models.origin import *
 from ymtech.models.env import *
+from ymtech.models.csv import *
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 
 # Create your views here.
 
@@ -36,6 +37,17 @@ def env(request, origin_id):
         env_list = []
     return HttpResponse(json.dumps({
         'status': 200,
+        'origin': origin_id,
         'env': env_list,
         'timestamp': int(time.time())
     }, indent=4), content_type='application/json')
+
+
+def csv(request, env_id):
+    that_env = CommonEnvDataModel.objects.filter(id=int(env_id))
+    if that_env:
+        that_env = that_env[0]
+        csv_content = CommonCsvDataModel.download_csv(that_env)
+    else:
+        csv_content = ''
+    return StreamingHttpResponse(streaming_content=csv_content, content_type='application/octet-stream')
