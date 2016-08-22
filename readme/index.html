@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>易摩科技后台说明书</title>
+	</head>
+<body>
+<h1>易摩科技后台说明书</h1>
+
+<h2>csv 格式</h2>
+
+<p><strong>一个标准的 csv 格式统计数据文件如下所示</strong></p>
+
+<pre><code>实验编号
+2016-08-22-00-55-41 yanwenhao
+初始转速,设定压力,转动惯量,摩擦片面数
+737.0,73.0,0.75,6.0
+温度,摩擦片内径,摩擦片外径,摩擦片厚度,润滑油粘度,初始油膜厚度,摩擦材表面粗糙度,粗糙密度
+80.0,0.06175,0.074,0.00623,0.0005652,2.54e-05,6e-06,30000000.0
+indextime,Tc,Finmin/10,w_rel/100,h*100000,muu
+0.000000,0.000000,0.000000,7.370000,2.540000,0.000000
+0.010000,0.000000,0.000000,7.270405,2.540706,0.000000
+0.020000,0.000000,0.000000,7.268440,2.541410,0.000000
+0.030000,0.000000,0.000000,7.266476,2.542110,0.000000
+0.040000,0.000000,0.000000,7.264512,2.542808,0.000000
+...
+</code></pre>
+
+<h2>协议</h2>
+
+<p><strong>本说明书中各项接口均采用 HTTPS 协议</strong></p>
+
+<h3>服务器状态</h3>
+
+<pre><code>GET /status/alive/
+</code></pre>
+
+<p><strong>服务器运行正常</strong></p>
+
+<pre><code>{
+    &quot;status&quot;: 200, 
+    &quot;timestamp&quot;: 1471842394, 
+    &quot;message&quot;: &quot;Hello world!&quot;
+}
+</code></pre>
+
+<h3>获取来源列表</h3>
+
+<pre><code>GET /status/origin/
+</code></pre>
+
+<p><strong>来源列表</strong></p>
+
+<pre><code>{
+    &quot;status&quot;: 200, 
+    &quot;origin&quot;: [
+        {
+            &quot;host&quot;: &quot;127.0.0.1&quot;, 
+            &quot;name&quot;: &quot;Localhost&quot;, 
+            &quot;power&quot;: 1, 
+            &quot;id&quot;: 1
+        }
+    ], 
+    &quot;timestamp&quot;: 1471842454
+}
+</code></pre>
+
+<h3>获取实验列表</h3>
+
+<pre><code>GET /status/env/%origin_id%
+GET /status/env/1
+</code></pre>
+
+<p><strong>实验列表</strong></p>
+
+<pre><code>{
+    &quot;status&quot;: 200, 
+    &quot;timestamp&quot;: 1471842584, 
+    &quot;origin&quot;: 1,
+    &quot;env&quot;: [
+        {
+            &quot;constant&quot;: {
+                &quot;oil_viscosity&quot;: 0.0005652, 
+                &quot;rotary_inertia&quot;: 0.75, 
+                &quot;initial_micro_polarity&quot;: 2.54e-05, 
+                &quot;initial_speed&quot;: 737.0, 
+                &quot;plate_thickness&quot;: 0.00623, 
+                &quot;temperature&quot;: 80.0, 
+                &quot;sides_count&quot;: 6.0, 
+                &quot;surface_roughness&quot;: 6e-06, 
+                &quot;outer_diameter&quot;: 0.074, 
+                &quot;inner_diameter&quot;: 0.06175, 
+                &quot;setting_pressure&quot;: 73.0, 
+                &quot;rough_density&quot;: 30000000.0
+            }, 
+            &quot;id&quot;: 1, 
+            &quot;name&quot;: &quot;2016-08-22-00-55-41 yanwenhao&quot;
+        }
+    ]
+}
+</code></pre>
+
+<h3>获取实验数据</h3>
+
+<pre><code>GET /status/csv/%env_id%.csv
+GET /status/csv/1.csv
+</code></pre>
+
+<p><strong>以 csv 格式获取实验数据流</strong></p>
+
+<h3>提交实验数据</h3>
+
+<pre><code>POST /data/submit/?secret=%secret_string%
+POST /data/submit/?secret=zLjn74yvd9hZN7U9FQaCPnKvxt3HqKih
+</code></pre>
+
+<p><strong>提交结果</strong></p>
+
+<pre><code>{
+    &quot;status&quot;: 200, 
+    &quot;count&quot;: 111, 
+    &quot;env&quot;: 1, 
+    &quot;timestamp&quot;: 1471842583
+}
+</code></pre>
+
+<h2>附录</h2>
+
+<p><em>Github 地址：<a href="https://github.com/Lessica/YMTech">https://github.com/Lessica/YMTech</a></em></p>
+
+<p><em>后台管理地址：<a href="https://api.82flex.com/admin/">https://api.82flex.com/admin/</a> </em></p>
+
+<p><em>用户名：root</em></p>
+
+<p><em>密码：r0pavoga</em></p>
+
+</body>
+</html>
+
