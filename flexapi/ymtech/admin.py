@@ -4,7 +4,6 @@ import sys
 import time
 import zipfile
 from django.contrib import admin
-from ymtech.models.origin import *
 from ymtech.models.csv import *
 from ymtech.models.env import *
 from django.http import StreamingHttpResponse
@@ -27,11 +26,9 @@ def export_as_csv(model_admin, request, queryset):
     if len(queryset) == 1:
         that_env = queryset[0]
         response = StreamingHttpResponse(
-            streaming_content=CommonCsvDataModel.download_csv(that_env),
-            content_type="application/octet-stream"
+            streaming_content=CommonCsvDataModel.download_csv(that_env)
         )
         name = that_env.name + '.csv'
-        response['Content-Disposition'] = 'attachment; filename="{0}"'.format(name.encode('utf-8'))
     else:
         zip_name = '/tmp/bundles_' + str(int(time.time())) + '.zip'
         f = zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED)
@@ -46,8 +43,8 @@ def export_as_csv(model_admin, request, queryset):
         f.close()
         response = StreamingHttpResponse(file_iterator(zip_name))
         name = "bundles.zip"
-        response['Content-Type'] = "application/octet-stream"
-        response['Content-Disposition'] = 'attachment; filename="{0}"'.format(name.encode('utf-8'))
+    response['Content-Type'] = "application/octet-stream"
+    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(name.encode('utf-8'))
     return response
 export_as_csv.short_description = u"另存为 csv 格式"
 

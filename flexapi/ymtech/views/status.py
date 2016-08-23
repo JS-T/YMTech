@@ -50,4 +50,8 @@ def csv(request, env_id):
         csv_content = CommonCsvDataModel.download_csv(that_env)
     else:
         csv_content = ''
-    return StreamingHttpResponse(streaming_content=csv_content, content_type='application/octet-stream')
+    response = StreamingHttpResponse(streaming_content=csv_content)
+    name = that_env.name
+    response['Content-Type'] = "application/octet-stream"
+    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(name.encode('utf-8'))
+    return response

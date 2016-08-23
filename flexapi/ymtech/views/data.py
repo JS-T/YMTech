@@ -2,11 +2,9 @@
 
 import time
 import json
-from ymtech.models.origin import *
 from ymtech.models.csv import *
 from ymtech.models.env import *
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 
 # Create your views here.
 
