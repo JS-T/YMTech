@@ -55,8 +55,8 @@ indextime,Tc,Finmin/10,w_rel/100,h*100000,muu
 }
 </code></pre>
     <h3>获取实验列表</h3>
-<pre><code>GET /status/env/%origin_id%
-GET /status/env/1</code></pre>
+<pre><code>GET /data/env/%origin_id%?secret=%secret_string%
+GET /data/env/1?secret=zLjn74yvd9hZN7U9FQaCPnKvxt3HqKih</code></pre>
     <p><strong>实验列表</strong></p>
 <pre><code>{
     &quot;status&quot;: 200, 
@@ -85,8 +85,8 @@ GET /status/env/1</code></pre>
 }
 </code></pre>
     <h3>获取实验数据</h3>
-<pre><code>GET /status/csv/%env_id%.csv
-GET /status/csv/1.csv</code></pre>
+<pre><code>GET /data/csv/%env_id%.csv?secret=%secret_string%
+GET /data/csv/1.csv?secret=zLjn74yvd9hZN7U9FQaCPnKvxt3HqKih</code></pre>
     <p><strong>以 csv 格式获取实验数据流</strong></p>
     <h3>提交实验数据</h3>
 <pre><code>POST /data/submit/?secret=%secret_string%
